@@ -14,6 +14,7 @@
 //  the "= npos" was added for C++14
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <cassert>
 
@@ -56,7 +57,7 @@ test_npos(S s, S str, typename S::size_type pos, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(), S(), 0, 0, S());
     test(S(), S(), 1, 0, S());
     test(S(), S("12345"), 0, 3, S("123"));
@@ -81,7 +82,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(), S(), 0, 0, S());
     test(S(), S(), 1, 0, S());
     test(S(), S("12345"), 0, 3, S("123"));
@@ -106,7 +107,7 @@ int main()
     }
 #endif
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test_npos(S(), S(), 0, S());
     test_npos(S(), S(), 1, S());
     test_npos(S(), S("12345"), 0, S("12345"));

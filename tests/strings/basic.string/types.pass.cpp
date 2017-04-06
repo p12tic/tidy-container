@@ -33,6 +33,7 @@
 // };
 
 #include <string>
+#include "tidystring.h"
 #include <iterator>
 #include <type_traits>
 
@@ -44,7 +45,7 @@ template <class Traits, class Allocator>
 void
 test()
 {
-    typedef std::basic_string<typename Traits::char_type, Traits, Allocator> S;
+    typedef tidy::basic_string<typename Traits::char_type, Traits, Allocator> S;
 
     static_assert((std::is_same<typename S::traits_type, Traits>::value), "");
     static_assert((std::is_same<typename S::value_type, typename Traits::char_type>::value), "");
@@ -75,9 +76,9 @@ int main()
 {
     test<test_traits<char>, test_allocator<char> >();
     test<std::char_traits<wchar_t>, std::allocator<wchar_t> >();
-    static_assert((std::is_same<std::basic_string<char>::traits_type,
+    static_assert((std::is_same<tidy::basic_string<char>::traits_type,
                                 std::char_traits<char> >::value), "");
-    static_assert((std::is_same<std::basic_string<char>::allocator_type,
+    static_assert((std::is_same<tidy::basic_string<char>::allocator_type,
                                 std::allocator<char> >::value), "");
 #if __cplusplus >= 201103L
     test<std::char_traits<char>, min_allocator<char> >();

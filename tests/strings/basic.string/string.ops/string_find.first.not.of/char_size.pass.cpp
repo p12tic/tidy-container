@@ -12,6 +12,7 @@
 // size_type find_first_not_of(charT c, size_type pos = 0) const;
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -38,7 +39,7 @@ test(const S& s, typename S::value_type c, typename S::size_type x)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(""), 'q', 0, S::npos);
     test(S(""), 'q', 1, S::npos);
     test(S("kitcj"), 'q', 0, 0);
@@ -69,7 +70,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(""), 'q', 0, S::npos);
     test(S(""), 'q', 1, S::npos);
     test(S("kitcj"), 'q', 0, 0);

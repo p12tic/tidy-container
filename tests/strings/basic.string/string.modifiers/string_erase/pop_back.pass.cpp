@@ -16,6 +16,7 @@
 #endif
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -32,14 +33,14 @@ test(S s, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S("abcde"), S("abcd"));
     test(S("abcdefghij"), S("abcdefghi"));
     test(S("abcdefghijklmnopqrst"), S("abcdefghijklmnopqrs"));
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S("abcde"), S("abcd"));
     test(S("abcdefghij"), S("abcdefghi"));
     test(S("abcdefghijklmnopqrst"), S("abcdefghijklmnopqrs"));
@@ -47,7 +48,7 @@ int main()
 #endif
 #if _LIBCPP_DEBUG >= 1
     {
-        std::string s;
+        tidy::string s;
         s.pop_back();
         assert(false);
     }

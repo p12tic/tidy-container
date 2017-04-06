@@ -12,6 +12,7 @@
 // basic_string(basic_string<charT,traits,Allocator>&& str);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
@@ -39,7 +40,7 @@ int main()
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
     test(S(A(3)));
     test(S("1", A(5)));
     test(S("1234567890123456789012345678901234567890123456789012345678901234567890", A(7)));
@@ -47,7 +48,7 @@ int main()
 #if __cplusplus >= 201103L
     {
     typedef min_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
     test(S(A{}));
     test(S("1", A()));
     test(S("1234567890123456789012345678901234567890123456789012345678901234567890", A()));

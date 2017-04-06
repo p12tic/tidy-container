@@ -17,13 +17,14 @@
 // const_iterator cend()   const;
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 int main()
 {
 #if _LIBCPP_STD_VER > 11
     { // N3644 testing
-        typedef std::string C;
+        typedef tidy::string C;
         C::iterator ii1{}, ii2{};
         C::iterator ii4 = ii1;
         C::const_iterator cii{};

@@ -12,6 +12,7 @@
 // ~basic_string() // implied noexcept;
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "test_allocator.h"
@@ -32,15 +33,15 @@ int main()
 {
 #if __has_feature(cxx_noexcept)
     {
-        typedef std::string C;
+        typedef tidy::string C;
         static_assert(std::is_nothrow_destructible<C>::value, "");
     }
     {
-        typedef std::basic_string<char, std::char_traits<char>, test_allocator<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, test_allocator<char>> C;
         static_assert(std::is_nothrow_destructible<C>::value, "");
     }
     {
-        typedef std::basic_string<char, std::char_traits<char>, some_alloc<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, some_alloc<char>> C;
         static_assert(!std::is_nothrow_destructible<C>::value, "");
     }
 #endif

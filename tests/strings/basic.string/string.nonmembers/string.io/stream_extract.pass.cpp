@@ -15,6 +15,7 @@
 //              basic_string<charT,traits,Allocator>& str);
 
 #include <string>
+#include "tidystring.h"
 #include <sstream>
 #include <cassert>
 
@@ -24,7 +25,7 @@ int main()
 {
     {
         std::istringstream in("a bc defghij");
-        std::string s("initial text");
+        tidy::string s("initial text");
         in >> s;
         assert(in.good());
         assert(s == "a");
@@ -68,7 +69,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+        typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
         std::istringstream in("a bc defghij");
         S s("initial text");
         in >> s;
@@ -91,7 +92,7 @@ int main()
         assert(in.fail());
     }
     {
-        typedef std::basic_string<wchar_t, std::char_traits<wchar_t>, min_allocator<wchar_t>> S;
+        typedef tidy::basic_string<wchar_t, std::char_traits<wchar_t>, min_allocator<wchar_t>> S;
         std::wistringstream in(L"a bc defghij");
         S s(L"initial text");
         in >> s;

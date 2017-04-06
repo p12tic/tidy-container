@@ -12,6 +12,7 @@
 // An string is a contiguous container
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "test_allocator.h"
@@ -28,7 +29,7 @@ void test_contiguous ( const C &c )
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test_contiguous(S());
     test_contiguous(S("1"));
     test_contiguous(S("1234567890123456789012345678901234567890123456789012345678901234567890"));
@@ -36,7 +37,7 @@ int main()
 
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
     test_contiguous(S(A(3)));
     test_contiguous(S("1", A(5)));
     test_contiguous(S("1234567890123456789012345678901234567890123456789012345678901234567890", A(7)));
@@ -44,7 +45,7 @@ int main()
 #if __cplusplus >= 201103L
     {
     typedef min_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
     test_contiguous(S(A{}));
     test_contiguous(S("1", A()));
     test_contiguous(S("1234567890123456789012345678901234567890123456789012345678901234567890", A()));

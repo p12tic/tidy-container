@@ -12,6 +12,7 @@
 // basic_string(const charT* s, const Allocator& a = Allocator());
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <algorithm>
 #include <cassert>
@@ -23,7 +24,7 @@ template <class charT>
 void
 test(const charT* s)
 {
-    typedef std::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
     typedef typename S::traits_type T;
     typedef typename S::allocator_type A;
     unsigned n = T::length(s);
@@ -39,7 +40,7 @@ template <class charT, class A>
 void
 test(const charT* s, const A& a)
 {
-    typedef std::basic_string<charT, std::char_traits<charT>, A> S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, A> S;
     typedef typename S::traits_type T;
     unsigned n = T::length(s);
     S s2(s, a);
@@ -54,7 +55,7 @@ int main()
 {
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
 
     test("");
     test("", A(2));
@@ -71,7 +72,7 @@ int main()
 #if __cplusplus >= 201103L
     {
     typedef min_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
 
     test("");
     test("", A());

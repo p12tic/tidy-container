@@ -16,6 +16,7 @@
 #define _LIBCPP_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 #include <iterator>
 #include <exception>
@@ -26,14 +27,14 @@
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     const S s;
     assert(s.back() == 0);
     assert(false);
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     const S s;
     assert(s.back() == 0);
     assert(false);

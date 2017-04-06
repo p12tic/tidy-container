@@ -12,6 +12,7 @@
 // explicit basic_string(const Allocator& a = Allocator());
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "test_macros.h"
@@ -23,10 +24,12 @@ void
 test()
 {
     {
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
-	static_assert((noexcept(S{})), "" );
+    static_assert((noexcept(S{})), "" );
 #elif TEST_STD_VER >= 11
-	static_assert((noexcept(S()) == noexcept(typename S::allocator_type())), "" );
+    static_assert((noexcept(S()) == noexcept(typename S::allocator_type())), "" );
+#endif
 #endif
     S s;
     assert(s.__invariants());
@@ -36,10 +39,12 @@ test()
     assert(s.get_allocator() == typename S::allocator_type());
     }
     {
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
-	static_assert((noexcept(S{typename S::allocator_type{}})), "" );
+    static_assert((noexcept(S{typename S::allocator_type{}})), "" );
 #elif TEST_STD_VER >= 11
-	static_assert((noexcept(S(typename S::allocator_type())) == std::is_nothrow_copy_constructible<typename S::allocator_type>::value), "" );
+    static_assert((noexcept(S(typename S::allocator_type())) == std::is_nothrow_copy_constructible<typename S::allocator_type>::value), "" );
+#endif
 #endif
     S s(typename S::allocator_type(5));
     assert(s.__invariants());
@@ -57,10 +62,12 @@ void
 test2()
 {
     {
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
 	static_assert((noexcept(S{})), "" );
 #elif TEST_STD_VER >= 11
 	static_assert((noexcept(S()) == noexcept(typename S::allocator_type())), "" );
+#endif
 #endif
     S s;
     assert(s.__invariants());
@@ -70,10 +77,12 @@ test2()
     assert(s.get_allocator() == typename S::allocator_type());
     }
     {
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
 	static_assert((noexcept(S{typename S::allocator_type{}})), "" );
 #elif TEST_STD_VER >= 11
 	static_assert((noexcept(S(typename S::allocator_type())) == std::is_nothrow_copy_constructible<typename S::allocator_type>::value), "" );
+#endif
 #endif
     S s(typename S::allocator_type{});
     assert(s.__invariants());
@@ -88,8 +97,8 @@ test2()
 
 int main()
 {
-    test<std::basic_string<char, std::char_traits<char>, test_allocator<char> > >();
+    test<tidy::basic_string<char, std::char_traits<char>, test_allocator<char> > >();
 #if TEST_STD_VER >= 11
-    test2<std::basic_string<char, std::char_traits<char>, min_allocator<char> > >();
+    test2<tidy::basic_string<char, std::char_traits<char>, min_allocator<char> > >();
 #endif
 }

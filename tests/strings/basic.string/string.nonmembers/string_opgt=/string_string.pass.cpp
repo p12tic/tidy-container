@@ -14,6 +14,7 @@
 //                  const basic_string<charT,traits,Allocator>& rhs);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -28,7 +29,7 @@ test(const S& lhs, const S& rhs, bool x)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(""), S(""), true);
     test(S(""), S("abcde"), false);
     test(S(""), S("abcdefghij"), false);
@@ -48,7 +49,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(""), S(""), true);
     test(S(""), S("abcde"), false);
     test(S(""), S("abcdefghij"), false);

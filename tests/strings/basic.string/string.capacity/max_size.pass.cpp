@@ -19,6 +19,7 @@
 // UNSUPPORTED: sanitizer-new-delete
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -57,14 +58,14 @@ test(const S& s)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S());
     test(S("123"));
     test(S("12345678901234567890123456789012345678901234567890"));
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S());
     test(S("123"));
     test(S("12345678901234567890123456789012345678901234567890"));

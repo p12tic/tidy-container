@@ -17,6 +17,7 @@
 #endif
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "../../input_iterator.h"
@@ -36,7 +37,7 @@ test(S s, typename S::difference_type pos, It first, It last, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     const char* s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     test(S(), 0, s, s, S());
     test(S(), 0, s, s+1, S("A"));
@@ -82,7 +83,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     const char* s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     test(S(), 0, s, s, S());
     test(S(), 0, s, s+1, S("A"));
@@ -129,11 +130,11 @@ int main()
 #endif
 #if _LIBCPP_DEBUG >= 1
     {
-        std::string v;
-        std::string v2;
+        tidy::string v;
+        tidy::string v2;
         char a[] = "123";
         const int N = sizeof(a)/sizeof(a[0]);
-        std::string::iterator i = v.insert(v2.cbegin() + 10, a, a+N);
+        tidy::string::iterator i = v.insert(v2.cbegin() + 10, a, a+N);
         assert(false);
     }
 #endif

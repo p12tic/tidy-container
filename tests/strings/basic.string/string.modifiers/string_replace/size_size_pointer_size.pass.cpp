@@ -15,6 +15,7 @@
 #include <stdio.h>
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <algorithm>
 #include <cassert>
@@ -1293,7 +1294,7 @@ void test11()
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test0<S>();
     test1<S>();
     test2<S>();
@@ -1309,7 +1310,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test0<S>();
     test1<S>();
     test2<S>();

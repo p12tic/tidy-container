@@ -12,6 +12,7 @@
 // basic_string<charT,traits,Allocator>& assign(const charT* s);
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <cassert>
 
@@ -29,7 +30,7 @@ test(S s, const typename S::value_type* str, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(), "", S());
     test(S(), "12345", S("12345"));
     test(S(), "12345678901234567890", S("12345678901234567890"));
@@ -45,7 +46,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(), "", S());
     test(S(), "12345", S("12345"));
     test(S(), "12345678901234567890", S("12345678901234567890"));

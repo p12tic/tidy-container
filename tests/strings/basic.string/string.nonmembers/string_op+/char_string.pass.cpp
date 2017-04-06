@@ -18,6 +18,7 @@
 //   operator+(charT lhs, basic_string<charT,traits,Allocator>&& rhs);
 
 #include <string>
+#include "tidystring.h"
 #include <utility>
 #include <cassert>
 
@@ -44,7 +45,7 @@ test1(typename S::value_type lhs, S&& rhs, const S& x)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test0('a', S(""), S("a"));
     test0('a', S("12345"), S("a12345"));
     test0('a', S("1234567890"), S("a1234567890"));
@@ -61,7 +62,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test0('a', S(""), S("a"));
     test0('a', S("12345"), S("a12345"));
     test0('a', S("1234567890"), S("a1234567890"));

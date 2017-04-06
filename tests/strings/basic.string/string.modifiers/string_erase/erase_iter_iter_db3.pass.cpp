@@ -16,6 +16,7 @@
 #define _LIBCPP_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 #include <exception>
 #include <cstdlib>
@@ -25,14 +26,14 @@
 int main()
 {
     {
-    std::string l1("123");
-    std::string l2("123");
-    std::string::iterator i = l1.erase(l2.cbegin(), l2.cbegin()+1);
+    tidy::string l1("123");
+    tidy::string l2("123");
+    tidy::string::iterator i = l1.erase(l2.cbegin(), l2.cbegin()+1);
     assert(false);
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     S l1("123");
     S l2("123");
     S::iterator i = l1.erase(l2.cbegin(), l2.cbegin()+1);

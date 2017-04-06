@@ -14,6 +14,7 @@
 //   const Allocator& a = Allocator());
 
 #include <string>
+#include "tidystring.h"
 #include <iterator>
 #include <cassert>
 
@@ -26,7 +27,7 @@ void
 test(It first, It last)
 {
     typedef typename std::iterator_traits<It>::value_type charT;
-    typedef std::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
     typedef typename S::traits_type T;
     typedef typename S::allocator_type A;
     S s2(first, last);
@@ -44,7 +45,7 @@ void
 test(It first, It last, const A& a)
 {
     typedef typename std::iterator_traits<It>::value_type charT;
-    typedef std::basic_string<charT, std::char_traits<charT>, A> S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, A> S;
     typedef typename S::traits_type T;
     S s2(first, last, a);
     assert(s2.__invariants());

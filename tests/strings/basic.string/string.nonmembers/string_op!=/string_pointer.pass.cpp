@@ -13,6 +13,7 @@
 //   bool operator!=(const basic_string<charT,traits,Allocator>& lhs, const charT* rhs);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -27,7 +28,7 @@ test(const S& lhs, const typename S::value_type* rhs, bool x)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(""), "", false);
     test(S(""), "abcde", true);
     test(S(""), "abcdefghij", true);
@@ -47,7 +48,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(""), "", false);
     test(S(""), "abcde", true);
     test(S(""), "abcdefghij", true);

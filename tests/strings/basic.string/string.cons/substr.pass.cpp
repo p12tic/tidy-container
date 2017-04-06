@@ -14,6 +14,7 @@
 //              const Allocator& a = Allocator());
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <algorithm>
 #include <cassert>
@@ -94,7 +95,7 @@ int main()
 {
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
 
     test(S(A(3)), 0);
     test(S(A(3)), 1);
@@ -133,7 +134,7 @@ int main()
 #if __cplusplus >= 201103L
     {
     typedef min_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
 
     test(S(A()), 0);
     test(S(A()), 1);

@@ -13,6 +13,7 @@
 //   basic_string& assign(InputIterator first, InputIterator last);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "../../input_iterator.h"
@@ -30,7 +31,7 @@ test(S s, It first, It last, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     const char* s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     test(S(), s, s, S());
     test(S(), s, s+1, S("A"));
@@ -89,7 +90,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     const char* s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     test(S(), s, s, S());
     test(S(), s, s+1, S("A"));

@@ -15,6 +15,7 @@
 // This tests a conforming extension
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "test_macros.h"
@@ -31,15 +32,15 @@ int main()
 {
 #if __has_feature(cxx_noexcept)
     {
-        typedef std::string C;
+        typedef tidy::string C;
         static_assert(std::is_nothrow_move_constructible<C>::value, "");
     }
     {
-        typedef std::basic_string<char, std::char_traits<char>, test_allocator<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, test_allocator<char>> C;
         static_assert(std::is_nothrow_move_constructible<C>::value, "");
     }
     {
-        typedef std::basic_string<char, std::char_traits<char>, some_alloc<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, some_alloc<char>> C;
 #if TEST_STD_VER <= 14
         static_assert(!std::is_nothrow_move_constructible<C>::value, "");
 #else

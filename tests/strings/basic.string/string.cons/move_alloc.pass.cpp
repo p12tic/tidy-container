@@ -12,6 +12,7 @@
 // basic_string(basic_string&& str, const Allocator& alloc);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
@@ -46,11 +47,13 @@ int main()
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
 	static_assert((noexcept(S{})), "" );
 #elif TEST_STD_VER >= 11
 	static_assert((noexcept(S()) == std::is_nothrow_move_constructible<A>::value), "" );
+#endif
 #endif
     test(S(), A(3));
     test(S("1"), A(5));
@@ -60,11 +63,13 @@ int main()
     int alloc_count = test_alloc_base::alloc_count;
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
 	static_assert((noexcept(S{})), "" );
 #elif TEST_STD_VER >= 11
 	static_assert((noexcept(S()) == std::is_nothrow_move_constructible<A>::value), "" );
+#endif
 #endif
     S s1 ( "Twas brillig, and the slivy toves did gyre and gymbal in the wabe" );
     S s2 (std::move(s1), A(1));
@@ -74,11 +79,13 @@ int main()
 #if TEST_STD_VER >= 11
     {
     typedef min_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
+#if TIDY_EXPECTED_FAIL
 #if TEST_STD_VER > 14
 	static_assert((noexcept(S{})), "" );
 #elif TEST_STD_VER >= 11
 	static_assert((noexcept(S()) == std::is_nothrow_move_constructible<A>::value), "" );
+#endif
 #endif
     test(S(), A());
     test(S("1"), A());

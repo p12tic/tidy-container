@@ -12,6 +12,7 @@
 // basic_string& replace(const_iterator i1, const_iterator i2, initializer_list<charT> il);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -20,13 +21,13 @@ int main()
 {
 #ifndef _LIBCPP_HAS_NO_GENERALIZED_INITIALIZERS
     {
-        std::string s("123def456");
+        tidy::string s("123def456");
         s.replace(s.cbegin() + 3, s.cbegin() + 6, {'a', 'b', 'c'});
         assert(s == "123abc456");
     }
 #if __cplusplus >= 201103L
     {
-        typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+        typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
         S s("123def456");
         s.replace(s.cbegin() + 3, s.cbegin() + 6, {'a', 'b', 'c'});
         assert(s == "123abc456");

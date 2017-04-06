@@ -12,6 +12,7 @@
 // size_type rfind(const basic_string& str, size_type pos = npos) const;
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -143,13 +144,13 @@ void test1()
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test0<S>();
     test1<S>();
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test0<S>();
     test1<S>();
     }

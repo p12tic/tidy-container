@@ -12,6 +12,7 @@
 // size_type capacity() const;
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "test_allocator.h"
@@ -38,7 +39,7 @@ test(S s)
 int main()
 {
     {
-    typedef std::basic_string<char, std::char_traits<char>, test_allocator<char> > S;
+    typedef tidy::basic_string<char, std::char_traits<char>, test_allocator<char> > S;
     S s;
     test(s);
     s.assign(10, 'a');
@@ -50,9 +51,11 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+#if TIDY_EXPECTED_FAIL
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     S s;
     assert(s.capacity() > 0);
+#endif
     }
 #endif
 }

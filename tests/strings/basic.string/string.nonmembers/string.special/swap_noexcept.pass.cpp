@@ -20,6 +20,7 @@
 // This tests a conforming extension
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "test_allocator.h"
@@ -53,17 +54,17 @@ int main()
 {
 #if __has_feature(cxx_noexcept)
     {
-        typedef std::string C;
+        typedef tidy::string C;
         C c1, c2;
         static_assert(noexcept(swap(c1, c2)), "");
     }
     {
-        typedef std::basic_string<char, std::char_traits<char>, test_allocator<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, test_allocator<char>> C;
         C c1, c2;
         static_assert(noexcept(swap(c1, c2)), "");
     }
     {
-        typedef std::basic_string<char, std::char_traits<char>, some_alloc<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, some_alloc<char>> C;
         C c1, c2;
 #if TEST_STD_VER >= 14
     //  In c++14, if POCS is set, swapping the allocator is required not to throw
@@ -74,7 +75,7 @@ int main()
     }
 #if TEST_STD_VER >= 14
     {
-        typedef std::basic_string<char, std::char_traits<char>, some_alloc2<char>> C;
+        typedef tidy::basic_string<char, std::char_traits<char>, some_alloc2<char>> C;
         C c1, c2;
     //  if the allocators are always equal, then the swap can be noexcept
         static_assert( noexcept(swap(c1, c2)), "");

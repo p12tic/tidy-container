@@ -13,6 +13,7 @@
 //   assign(size_type n, charT c);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -29,7 +30,7 @@ test(S s, typename S::size_type n, typename S::value_type c, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(), 0, 'a', S());
     test(S(), 1, 'a', S(1, 'a'));
     test(S(), 10, 'a', S(10, 'a'));
@@ -45,7 +46,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(), 0, 'a', S());
     test(S(), 1, 'a', S(1, 'a'));
     test(S(), 10, 'a', S(10, 'a'));

@@ -12,6 +12,7 @@
 // iterator erase(const_iterator first, const_iterator last);
 
 #include <string>
+#include "tidystring.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -31,7 +32,7 @@ test(S s, typename S::difference_type pos, typename S::difference_type n, S expe
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(""), 0, 0, S(""));
     test(S("abcde"), 0, 0, S("abcde"));
     test(S("abcde"), 0, 1, S("bcde"));
@@ -89,7 +90,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(""), 0, 0, S(""));
     test(S("abcde"), 0, 0, S("abcde"));
     test(S("abcde"), 0, 1, S("bcde"));

@@ -13,6 +13,7 @@
 //   insert(size_type pos1, const basic_string& str);
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <cassert>
 
@@ -41,7 +42,7 @@ test(S s, typename S::size_type pos, S str, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     test(S(""), 0, S(""), S(""));
     test(S(""), 0, S("12345"), S("12345"));
     test(S(""), 0, S("1234567890"), S("1234567890"));
@@ -125,7 +126,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     test(S(""), 0, S(""), S(""));
     test(S(""), 0, S("12345"), S("12345"));
     test(S(""), 0, S("1234567890"), S("1234567890"));

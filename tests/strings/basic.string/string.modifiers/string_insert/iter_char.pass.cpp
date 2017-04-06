@@ -16,6 +16,7 @@
 #endif
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <cassert>
 
@@ -39,7 +40,7 @@ test(S& s, typename S::const_iterator p, typename S::value_type c, S expected)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     S s;
     test(s, s.begin(), '1', S("1"));
     test(s, s.begin(), 'a', S("a1"));
@@ -58,7 +59,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     S s;
     test(s, s.begin(), '1', S("1"));
     test(s, s.begin(), 'a', S("a1"));
@@ -78,7 +79,7 @@ int main()
 #endif
 #if _LIBCPP_DEBUG >= 1
     {
-        typedef std::string S;
+        typedef tidy::string S;
         S s;
         S s2;
         s.insert(s2.begin(), '1');

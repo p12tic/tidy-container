@@ -12,6 +12,7 @@
 // void reserve(size_type res_arg=0);
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <cassert>
 
@@ -53,7 +54,7 @@ test(S s, typename S::size_type res_arg)
 int main()
 {
     {
-    typedef std::string S;
+    typedef tidy::string S;
     {
     S s;
     test(s);
@@ -84,7 +85,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    typedef std::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, min_allocator<char>> S;
     {
     S s;
     test(s);

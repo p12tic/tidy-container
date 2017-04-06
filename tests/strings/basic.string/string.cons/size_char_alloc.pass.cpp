@@ -12,6 +12,7 @@
 // basic_string(size_type n, charT c, const Allocator& a = Allocator());
 
 #include <string>
+#include "tidystring.h"
 #include <stdexcept>
 #include <algorithm>
 #include <cassert>
@@ -23,7 +24,7 @@ template <class charT>
 void
 test(unsigned n, charT c)
 {
-    typedef std::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
     typedef typename S::traits_type T;
     typedef typename S::allocator_type A;
     S s2(n, c);
@@ -39,7 +40,7 @@ template <class charT, class A>
 void
 test(unsigned n, charT c, const A& a)
 {
-    typedef std::basic_string<charT, std::char_traits<charT>, A> S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, A> S;
     typedef typename S::traits_type T;
     S s2(n, c, a);
     assert(s2.__invariants());
@@ -55,7 +56,7 @@ void
 test(Tp n, Tp c)
 {
     typedef char charT;
-    typedef std::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, test_allocator<charT> > S;
     typedef typename S::traits_type T;
     typedef typename S::allocator_type A;
     S s2(n, c);
@@ -72,7 +73,7 @@ void
 test(Tp n, Tp c, const A& a)
 {
     typedef char charT;
-    typedef std::basic_string<charT, std::char_traits<charT>, A> S;
+    typedef tidy::basic_string<charT, std::char_traits<charT>, A> S;
     typedef typename S::traits_type T;
     S s2(n, c, a);
     assert(s2.__invariants());
@@ -87,7 +88,7 @@ int main()
 {
     {
     typedef test_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
 
     test(0, 'a');
     test(0, 'a', A(2));
@@ -107,7 +108,7 @@ int main()
 #if __cplusplus >= 201103L
     {
     typedef min_allocator<char> A;
-    typedef std::basic_string<char, std::char_traits<char>, A> S;
+    typedef tidy::basic_string<char, std::char_traits<char>, A> S;
 
     test(0, 'a');
     test(0, 'a', A());
