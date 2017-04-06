@@ -12,6 +12,7 @@
 // void assign(size_type n, const_reference v);
 
 #include <vector>
+#include "tidyvector.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -33,7 +34,7 @@ void test ( Vec &v )
 int main()
 {
     {
-    typedef std::vector<int> V;
+    typedef tidy::vector<int> V;
     V d1;
     V d2;
     d2.reserve(10);  // no reallocation during assign.
@@ -43,7 +44,7 @@ int main()
 
 #if __cplusplus >= 201103L
     {
-    typedef std::vector<int, min_allocator<int>> V;
+    typedef tidy::vector<int, min_allocator<int>> V;
     V d1;
     V d2;
     d2.reserve(10);  // no reallocation during assign.

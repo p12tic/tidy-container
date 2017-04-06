@@ -12,6 +12,7 @@
 // iterator erase(const_iterator position);
 
 #include <vector>
+#include "tidyvector.h"
 #include <iterator>
 #include <cassert>
 
@@ -22,11 +23,11 @@ int main()
 {
     {
     int a1[] = {1, 2, 3};
-    std::vector<int> l1(a1, a1+3);
-    std::vector<int>::const_iterator i = l1.begin();
+    tidy::vector<int> l1(a1, a1+3);
+    tidy::vector<int>::const_iterator i = l1.begin();
     assert(is_contiguous_container_asan_correct(l1)); 
     ++i;
-    std::vector<int>::iterator j = l1.erase(i);
+    tidy::vector<int>::iterator j = l1.erase(i);
     assert(l1.size() == 2);
     assert(distance(l1.begin(), l1.end()) == 2);
     assert(*j == 3);
@@ -48,11 +49,11 @@ int main()
 #if __cplusplus >= 201103L
     {
     int a1[] = {1, 2, 3};
-    std::vector<int, min_allocator<int>> l1(a1, a1+3);
-    std::vector<int, min_allocator<int>>::const_iterator i = l1.begin();
+    tidy::vector<int, min_allocator<int>> l1(a1, a1+3);
+    tidy::vector<int, min_allocator<int>>::const_iterator i = l1.begin();
     assert(is_contiguous_container_asan_correct(l1)); 
     ++i;
-    std::vector<int, min_allocator<int>>::iterator j = l1.erase(i);
+    tidy::vector<int, min_allocator<int>>::iterator j = l1.erase(i);
     assert(l1.size() == 2);
     assert(distance(l1.begin(), l1.end()) == 2);
     assert(*j == 3);

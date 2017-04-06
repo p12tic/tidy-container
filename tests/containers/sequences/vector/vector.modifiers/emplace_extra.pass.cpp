@@ -12,6 +12,7 @@
 // template <class... Args> iterator emplace(const_iterator pos, Args&&... args);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -21,7 +22,7 @@ int main()
 {
 #ifndef _LIBCPP_HAS_NO_GENERALIZED_INITIALIZERS
     {
-        std::vector<int> v;
+        tidy::vector<int> v;
         v.reserve(3);
         assert(is_contiguous_container_asan_correct(v)); 
         v = { 1, 2, 3 };
@@ -30,7 +31,7 @@ int main()
         assert(is_contiguous_container_asan_correct(v)); 
     }
     {
-        std::vector<int> v;
+        tidy::vector<int> v;
         v.reserve(4);
         assert(is_contiguous_container_asan_correct(v)); 
         v = { 1, 2, 3 };
@@ -40,7 +41,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<int, min_allocator<int>> v;
+        tidy::vector<int, min_allocator<int>> v;
         v.reserve(3);
         assert(is_contiguous_container_asan_correct(v)); 
         v = { 1, 2, 3 };
@@ -49,7 +50,7 @@ int main()
         assert(is_contiguous_container_asan_correct(v)); 
     }
     {
-        std::vector<int, min_allocator<int>> v;
+        tidy::vector<int, min_allocator<int>> v;
         v.reserve(4);
         assert(is_contiguous_container_asan_correct(v)); 
         v = { 1, 2, 3 };

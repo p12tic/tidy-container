@@ -11,6 +11,7 @@
 #define ASAN_TESTING_H
 
 #include <__config>
+#include "tidyvector.h"
 
 #ifndef _LIBCPP_HAS_NO_ASAN
 extern "C" int __sanitizer_verify_contiguous_container
@@ -25,9 +26,23 @@ bool is_contiguous_container_asan_correct ( const std::vector<T, Alloc> &c )
     return true;
 }
 
+template <typename T, typename Alloc>
+bool is_contiguous_container_asan_correct ( const tidy::vector<T, Alloc> &c )
+{
+    if ( std::is_same<Alloc, std::allocator<T> >::value && c.data() != NULL)
+        return __sanitizer_verify_contiguous_container (
+            c.data(), c.data() + c.size(), c.data() + c.capacity()) != 0;
+    return true;
+}
+
 #else
 template <typename T, typename Alloc>
 bool is_contiguous_container_asan_correct ( const std::vector<T, Alloc> &c )
+{
+    return true;
+}
+template <typename T, typename Alloc>
+bool is_contiguous_container_asan_correct ( const tidy::vector<T, Alloc> &c )
 {
     return true;
 }

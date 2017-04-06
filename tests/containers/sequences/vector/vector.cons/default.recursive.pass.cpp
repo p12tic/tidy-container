@@ -12,10 +12,11 @@
 // vector();
 
 #include <vector>
+#include "tidyvector.h"
 
 struct X
 {
-    std::vector<X> q;
+    tidy::vector<X> q;
 };
 
 int main()

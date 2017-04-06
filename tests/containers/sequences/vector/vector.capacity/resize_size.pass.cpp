@@ -12,6 +12,7 @@
 // void resize(size_type sz);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "MoveOnly.h"
@@ -20,9 +21,9 @@
 
 int main()
 {
-#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+#if TIDY_EXPECTED_FAIL
     {
-        std::vector<MoveOnly> v(100);
+        tidy::vector<MoveOnly> v(100);
         v.resize(50);
         assert(v.size() == 50);
         assert(v.capacity() == 100);
@@ -33,7 +34,7 @@ int main()
         assert(is_contiguous_container_asan_correct(v)); 
     }
     {
-        std::vector<MoveOnly, stack_allocator<MoveOnly, 300> > v(100);
+        tidy::vector<MoveOnly, stack_allocator<MoveOnly, 300> > v(100);
         v.resize(50);
         assert(v.size() == 50);
         assert(v.capacity() == 100);
@@ -43,9 +44,9 @@ int main()
         assert(v.capacity() >= 200);
         assert(is_contiguous_container_asan_correct(v)); 
     }
-#else  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+#endif
     {
-        std::vector<int> v(100);
+        tidy::vector<int> v(100);
         v.resize(50);
         assert(v.size() == 50);
         assert(v.capacity() == 100);
@@ -56,7 +57,7 @@ int main()
         assert(is_contiguous_container_asan_correct(v)); 
     }
     {
-        std::vector<int, stack_allocator<int, 300> > v(100);
+        tidy::vector<int, stack_allocator<int, 300> > v(100);
         v.resize(50);
         assert(v.size() == 50);
         assert(v.capacity() == 100);
@@ -66,10 +67,10 @@ int main()
         assert(v.capacity() >= 200);
         assert(is_contiguous_container_asan_correct(v)); 
     }
-#endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
 #if __cplusplus >= 201103L
+#if TIDY_EXPECTED_FAIL
     {
-        std::vector<MoveOnly, min_allocator<MoveOnly>> v(100);
+        tidy::vector<MoveOnly, min_allocator<MoveOnly>> v(100);
         v.resize(50);
         assert(v.size() == 50);
         assert(v.capacity() == 100);
@@ -79,5 +80,6 @@ int main()
         assert(v.capacity() >= 200);
         assert(is_contiguous_container_asan_correct(v)); 
     }
+#endif
 #endif
 }

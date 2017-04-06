@@ -16,6 +16,7 @@
 #define _LIBCPP_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include <exception>
 #include <cstdlib>
@@ -26,15 +27,15 @@ int main()
 {
     {
     int a1[] = {1, 2, 3};
-    std::vector<int> l1(a1, a1+3);
-    std::vector<int>::iterator i = l1.erase(l1.cbegin()+1, l1.cbegin());
+    tidy::vector<int> l1(a1, a1+3);
+    tidy::vector<int>::iterator i = l1.erase(l1.cbegin()+1, l1.cbegin());
     assert(false);
     }
 #if __cplusplus >= 201103L
     {
     int a1[] = {1, 2, 3};
-    std::vector<int, min_allocator<int>> l1(a1, a1+3);
-    std::vector<int, min_allocator<int>>::iterator i = l1.erase(l1.cbegin()+1, l1.cbegin());
+    tidy::vector<int, min_allocator<int>> l1(a1, a1+3);
+    tidy::vector<int, min_allocator<int>>::iterator i = l1.erase(l1.cbegin()+1, l1.cbegin());
     assert(false);
     }
 #endif

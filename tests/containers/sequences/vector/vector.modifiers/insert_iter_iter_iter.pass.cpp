@@ -17,6 +17,7 @@
 #endif
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "test_iterators.h"
@@ -26,10 +27,10 @@
 int main()
 {
     {
-        std::vector<int> v(100);
+        tidy::vector<int> v(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v.cbegin() + 10, input_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v.cbegin() + 10, input_iterator<const int*>(a),
                                         input_iterator<const int*>(a+N));
         assert(v.size() == 100 + N);
         assert(is_contiguous_container_asan_correct(v)); 
@@ -43,10 +44,10 @@ int main()
             assert(v[j] == 0);
     }
     {
-        std::vector<int> v(100);
+        tidy::vector<int> v(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
                                         forward_iterator<const int*>(a+N));
         assert(v.size() == 100 + N);
         assert(is_contiguous_container_asan_correct(v)); 
@@ -60,12 +61,12 @@ int main()
             assert(v[j] == 0);
     }
     {
-        std::vector<int> v(100);
+        tidy::vector<int> v(100);
         while(v.size() < v.capacity()) v.push_back(0); // force reallocation
         size_t sz = v.size();
         int a[] = {1, 2, 3, 4, 5};
         const unsigned N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
                                         forward_iterator<const int*>(a+N));
         assert(v.size() == sz + N);
         assert(i == v.begin() + 10);
@@ -78,12 +79,12 @@ int main()
             assert(v[j] == 0);
     }
     {
-        std::vector<int> v(100);
+        tidy::vector<int> v(100);
         v.reserve(128); // force no reallocation
         size_t sz = v.size();
         int a[] = {1, 2, 3, 4, 5};
         const unsigned N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
                                         forward_iterator<const int*>(a+N));
         assert(v.size() == sz + N);
         assert(i == v.begin() + 10);
@@ -96,10 +97,10 @@ int main()
             assert(v[j] == 0);
     }
     {
-        std::vector<int, stack_allocator<int, 308> > v(100);
+        tidy::vector<int, stack_allocator<int, 308> > v(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v.cbegin() + 10, input_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v.cbegin() + 10, input_iterator<const int*>(a),
                                         input_iterator<const int*>(a+N));
         assert(v.size() == 100 + N);
         assert(is_contiguous_container_asan_correct(v)); 
@@ -113,10 +114,10 @@ int main()
             assert(v[j] == 0);
     }
     {
-        std::vector<int, stack_allocator<int, 300> > v(100);
+        tidy::vector<int, stack_allocator<int, 300> > v(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
                                         forward_iterator<const int*>(a+N));
         assert(v.size() == 100 + N);
         assert(is_contiguous_container_asan_correct(v)); 
@@ -131,21 +132,21 @@ int main()
     }
 #if _LIBCPP_DEBUG >= 1
     {
-        std::vector<int> v(100);
-        std::vector<int> v2(100);
+        tidy::vector<int> v(100);
+        tidy::vector<int> v2(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int>::iterator i = v.insert(v2.cbegin() + 10, input_iterator<const int*>(a),
+        tidy::vector<int>::iterator i = v.insert(v2.cbegin() + 10, input_iterator<const int*>(a),
                                         input_iterator<const int*>(a+N));
         assert(false);
     }
 #endif
 #if __cplusplus >= 201103L
     {
-        std::vector<int, min_allocator<int>> v(100);
+        tidy::vector<int, min_allocator<int>> v(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int, min_allocator<int>>::iterator i = v.insert(v.cbegin() + 10, input_iterator<const int*>(a),
+        tidy::vector<int, min_allocator<int>>::iterator i = v.insert(v.cbegin() + 10, input_iterator<const int*>(a),
                                         input_iterator<const int*>(a+N));
         assert(v.size() == 100 + N);
         assert(is_contiguous_container_asan_correct(v)); 
@@ -159,10 +160,10 @@ int main()
             assert(v[j] == 0);
     }
     {
-        std::vector<int, min_allocator<int>> v(100);
+        tidy::vector<int, min_allocator<int>> v(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int, min_allocator<int>>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
+        tidy::vector<int, min_allocator<int>>::iterator i = v.insert(v.cbegin() + 10, forward_iterator<const int*>(a),
                                         forward_iterator<const int*>(a+N));
         assert(v.size() == 100 + N);
         assert(is_contiguous_container_asan_correct(v)); 
@@ -177,11 +178,11 @@ int main()
     }
 #if _LIBCPP_DEBUG >= 1
     {
-        std::vector<int, min_allocator<int>> v(100);
-        std::vector<int, min_allocator<int>> v2(100);
+        tidy::vector<int, min_allocator<int>> v(100);
+        tidy::vector<int, min_allocator<int>> v2(100);
         int a[] = {1, 2, 3, 4, 5};
         const int N = sizeof(a)/sizeof(a[0]);
-        std::vector<int, min_allocator<int>>::iterator i = v.insert(v2.cbegin() + 10, input_iterator<const int*>(a),
+        tidy::vector<int, min_allocator<int>>::iterator i = v.insert(v2.cbegin() + 10, input_iterator<const int*>(a),
                                         input_iterator<const int*>(a+N));
         assert(false);
     }

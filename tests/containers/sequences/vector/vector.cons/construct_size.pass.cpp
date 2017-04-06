@@ -12,6 +12,7 @@
 // explicit vector(size_type n);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "DefaultOnly.h"
@@ -61,13 +62,17 @@ test(typename C::size_type n)
 
 int main()
 {
-    test<std::vector<int> >(50);
-    test<std::vector<DefaultOnly> >(500);
+    test<tidy::vector<int> >(50);
+#if TIDY_EXPECTED_FAIL
+    test<tidy::vector<DefaultOnly> >(500);
     assert(DefaultOnly::count == 0);
+#endif
 #if __cplusplus >= 201103L
-    test<std::vector<int, min_allocator<int>> >(50);
-    test<std::vector<DefaultOnly, min_allocator<DefaultOnly>> >(500);
-    test2<std::vector<DefaultOnly, test_allocator<DefaultOnly>> >( 100, test_allocator<DefaultOnly>(23));
+    test<tidy::vector<int, min_allocator<int>> >(50);
+#if TIDY_EXPECTED_FAIL
+    test<tidy::vector<DefaultOnly, min_allocator<DefaultOnly>> >(500);
+    test2<tidy::vector<DefaultOnly, test_allocator<DefaultOnly>> >( 100, test_allocator<DefaultOnly>(23));
     assert(DefaultOnly::count == 0);
+#endif
 #endif
 }

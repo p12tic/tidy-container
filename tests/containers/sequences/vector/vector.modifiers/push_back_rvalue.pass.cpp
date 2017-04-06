@@ -12,6 +12,7 @@
 // void push_back(value_type&& x);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "MoveOnly.h"
 #include "../../../stack_allocator.h"
@@ -20,9 +21,11 @@
 
 int main()
 {
+// the container supports only trivial types
+#if TIDY_EXPECTED_FAIL
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
     {
-        std::vector<MoveOnly> c;
+        tidy::vector<MoveOnly> c;
         c.push_back(MoveOnly(0));
         assert(c.size() == 1);
         assert(is_contiguous_container_asan_correct(c)); 
@@ -50,7 +53,7 @@ int main()
             assert(c[j] == MoveOnly(j));
     }
     {
-        std::vector<MoveOnly, stack_allocator<MoveOnly, 15> > c;
+        tidy::vector<MoveOnly, stack_allocator<MoveOnly, 15> > c;
         c.push_back(MoveOnly(0));
         assert(c.size() == 1);
         assert(is_contiguous_container_asan_correct(c)); 
@@ -79,7 +82,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<MoveOnly, min_allocator<MoveOnly>> c;
+        tidy::vector<MoveOnly, min_allocator<MoveOnly>> c;
         c.push_back(MoveOnly(0));
         assert(c.size() == 1);
         assert(is_contiguous_container_asan_correct(c)); 
@@ -108,4 +111,5 @@ int main()
     }
 #endif
 #endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+#endif // TIDY_EXPECTED_FAIL
 }

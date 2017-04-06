@@ -17,6 +17,7 @@
 #endif
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -27,10 +28,10 @@ int main()
     {
         int a1[] = {1, 3, 7, 9, 10};
         int a2[] = {0, 2, 4, 5, 6, 8, 11};
-        std::vector<int> c1(a1, a1+sizeof(a1)/sizeof(a1[0]));
-        std::vector<int> c2(a2, a2+sizeof(a2)/sizeof(a2[0]));
-        std::vector<int>::iterator i1 = c1.begin();
-        std::vector<int>::iterator i2 = c2.begin();
+        tidy::vector<int> c1(a1, a1+sizeof(a1)/sizeof(a1[0]));
+        tidy::vector<int> c2(a2, a2+sizeof(a2)/sizeof(a2[0]));
+        tidy::vector<int>::iterator i1 = c1.begin();
+        tidy::vector<int>::iterator i2 = c2.begin();
         swap(c1, c2);
         c1.erase(i2);
         c2.erase(i1);
@@ -41,10 +42,10 @@ int main()
     {
         int a1[] = {1, 3, 7, 9, 10};
         int a2[] = {0, 2, 4, 5, 6, 8, 11};
-        std::vector<int, min_allocator<int>> c1(a1, a1+sizeof(a1)/sizeof(a1[0]));
-        std::vector<int, min_allocator<int>> c2(a2, a2+sizeof(a2)/sizeof(a2[0]));
-        std::vector<int, min_allocator<int>>::iterator i1 = c1.begin();
-        std::vector<int, min_allocator<int>>::iterator i2 = c2.begin();
+        tidy::vector<int, min_allocator<int>> c1(a1, a1+sizeof(a1)/sizeof(a1[0]));
+        tidy::vector<int, min_allocator<int>> c2(a2, a2+sizeof(a2)/sizeof(a2[0]));
+        tidy::vector<int, min_allocator<int>>::iterator i1 = c1.begin();
+        tidy::vector<int, min_allocator<int>>::iterator i2 = c2.begin();
         swap(c1, c2);
         c1.erase(i2);
         c2.erase(i1);

@@ -10,6 +10,7 @@
 // Test asan vector annotations with a class that throws in a CTOR.
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "asan_testing.h"
@@ -54,7 +55,7 @@ public:
 };
 
 void test_push_back() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(2);
   v.push_back(X(2));
   assert(v.size() == 1);
@@ -70,7 +71,7 @@ void test_push_back() {
 
 void test_emplace_back() {
 #ifndef _LIBCPP_HAS_NO_VARIADICS
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(2);
   v.push_back(X(2));
   assert(v.size() == 1);
@@ -86,7 +87,7 @@ void test_emplace_back() {
 }
 
 void test_insert_range() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(4);
   v.push_back(X(1));
   v.push_back(X(2));
@@ -104,7 +105,7 @@ void test_insert_range() {
 }
 
 void test_insert() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(3);
   v.insert(v.end(), X(1));
   v.insert(v.begin(), X(2));
@@ -121,7 +122,7 @@ void test_insert() {
 
 void test_emplace() {
 #ifndef _LIBCPP_HAS_NO_VARIADICS
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(3);
   v.insert(v.end(), X(1));
   v.insert(v.begin(), X(2));
@@ -138,7 +139,7 @@ void test_emplace() {
 }
 
 void test_insert_range2() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(4);
   v.insert(v.end(), X(1));
   v.insert(v.begin(), X(2));
@@ -157,7 +158,7 @@ void test_insert_range2() {
 }
 
 void test_insert_n() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(10);
   v.insert(v.end(), X(1));
   v.insert(v.begin(), X(2));
@@ -175,7 +176,7 @@ void test_insert_n() {
 
 
 void test_insert_n2() {
-  std::vector<ThrowOnCopy> v(10);
+  tidy::vector<ThrowOnCopy> v(10);
   v.reserve(100);
   assert(v.size() == 10);
   v[6].should_throw = true;
@@ -191,7 +192,7 @@ void test_insert_n2() {
 }
 
 void test_resize() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(3);
   v.push_back(X(0));
   try {
@@ -205,7 +206,7 @@ void test_resize() {
 }
 
 void test_resize_param() {
-  std::vector<X> v;
+  tidy::vector<X> v;
   v.reserve(3);
   v.push_back(X(0));
   try {

@@ -12,6 +12,7 @@
 // vector(size_type n, const value_type& x, const allocator_type& a);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "min_allocator.h"
 #include "asan_testing.h"
@@ -32,8 +33,8 @@ test(typename C::size_type n, const typename C::value_type& x,
 
 int main()
 {
-    test<std::vector<int> >(50, 3, std::allocator<int>());
+    test<tidy::vector<int> >(50, 3, std::allocator<int>());
 #if __cplusplus >= 201103L
-    test<std::vector<int, min_allocator<int>> >(50, 3, min_allocator<int>());
+    test<tidy::vector<int, min_allocator<int>> >(50, 3, min_allocator<int>());
 #endif
 }

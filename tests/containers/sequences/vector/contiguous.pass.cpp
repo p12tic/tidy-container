@@ -12,6 +12,7 @@
 // An vector is a contiguous container
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "test_allocator.h"
@@ -28,7 +29,7 @@ int main()
 {
     {
     typedef int T;
-    typedef std::vector<T> C;
+    typedef tidy::vector<T> C;
     test_contiguous(C());
     test_contiguous(C(3, 5));
     }
@@ -36,7 +37,7 @@ int main()
     {
     typedef double T;
     typedef test_allocator<T> A;
-    typedef std::vector<T, A> C;
+    typedef tidy::vector<T, A> C;
     test_contiguous(C(A(3)));
     test_contiguous(C(7, 9.0, A(5)));
     }
@@ -44,7 +45,7 @@ int main()
     {
     typedef double T;
     typedef min_allocator<T> A;
-    typedef std::vector<T, A> C;
+    typedef tidy::vector<T, A> C;
     test_contiguous(C(A{}));
     test_contiguous(C(9, 11.0, A{}));
     }

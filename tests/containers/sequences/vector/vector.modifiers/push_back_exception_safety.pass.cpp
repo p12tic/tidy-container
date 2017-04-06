@@ -12,6 +12,7 @@
 // void push_back(const value_type& x);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "asan_testing.h"
@@ -68,10 +69,10 @@ bool operator==(const CMyClass &lhs, const CMyClass &rhs) { return lhs.equal(rhs
 int main()
 {
     CMyClass instance(42);
-    std::vector<CMyClass> vec;
+    tidy::vector<CMyClass> vec;
 
     vec.push_back(instance);
-    std::vector<CMyClass> vec2(vec);
+    tidy::vector<CMyClass> vec2(vec);
     assert(is_contiguous_container_asan_correct(vec)); 
     assert(is_contiguous_container_asan_correct(vec2)); 
 

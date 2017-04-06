@@ -16,6 +16,7 @@
 #define _LIBCPP_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include <iterator>
 #include <exception>
@@ -27,7 +28,7 @@ int main()
 {
     {
     typedef int T;
-    typedef std::vector<T> C;
+    typedef tidy::vector<T> C;
     const C c;
     assert(c.back() == 0);
     assert(false);
@@ -35,7 +36,7 @@ int main()
 #if __cplusplus >= 201103L
     {
     typedef int T;
-    typedef std::vector<T, min_allocator<T>> C;
+    typedef tidy::vector<T, min_allocator<T>> C;
     const C c;
     assert(c.back() == 0);
     assert(false);

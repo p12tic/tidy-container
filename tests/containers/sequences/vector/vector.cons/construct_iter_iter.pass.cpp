@@ -12,6 +12,7 @@
 // template <class InputIter> vector(InputIter first, InputIter last);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "test_iterators.h"
@@ -35,22 +36,22 @@ int main()
 {
     int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 1, 0};
     int* an = a + sizeof(a)/sizeof(a[0]);
-    test<std::vector<int> >(input_iterator<const int*>(a), input_iterator<const int*>(an));
-    test<std::vector<int> >(forward_iterator<const int*>(a), forward_iterator<const int*>(an));
-    test<std::vector<int> >(bidirectional_iterator<const int*>(a), bidirectional_iterator<const int*>(an));
-    test<std::vector<int> >(random_access_iterator<const int*>(a), random_access_iterator<const int*>(an));
-    test<std::vector<int> >(a, an);
+    test<tidy::vector<int> >(input_iterator<const int*>(a), input_iterator<const int*>(an));
+    test<tidy::vector<int> >(forward_iterator<const int*>(a), forward_iterator<const int*>(an));
+    test<tidy::vector<int> >(bidirectional_iterator<const int*>(a), bidirectional_iterator<const int*>(an));
+    test<tidy::vector<int> >(random_access_iterator<const int*>(a), random_access_iterator<const int*>(an));
+    test<tidy::vector<int> >(a, an);
 
-    test<std::vector<int, stack_allocator<int, 63> > >(input_iterator<const int*>(a), input_iterator<const int*>(an));
-    test<std::vector<int, stack_allocator<int, 18> > >(forward_iterator<const int*>(a), forward_iterator<const int*>(an));
-    test<std::vector<int, stack_allocator<int, 18> > >(bidirectional_iterator<const int*>(a), bidirectional_iterator<const int*>(an));
-    test<std::vector<int, stack_allocator<int, 18> > >(random_access_iterator<const int*>(a), random_access_iterator<const int*>(an));
-    test<std::vector<int, stack_allocator<int, 18> > >(a, an);
+    test<tidy::vector<int, stack_allocator<int, 63> > >(input_iterator<const int*>(a), input_iterator<const int*>(an));
+    test<tidy::vector<int, stack_allocator<int, 18> > >(forward_iterator<const int*>(a), forward_iterator<const int*>(an));
+    test<tidy::vector<int, stack_allocator<int, 18> > >(bidirectional_iterator<const int*>(a), bidirectional_iterator<const int*>(an));
+    test<tidy::vector<int, stack_allocator<int, 18> > >(random_access_iterator<const int*>(a), random_access_iterator<const int*>(an));
+    test<tidy::vector<int, stack_allocator<int, 18> > >(a, an);
 #if __cplusplus >= 201103L
-    test<std::vector<int, min_allocator<int>> >(input_iterator<const int*>(a), input_iterator<const int*>(an));
-    test<std::vector<int, min_allocator<int>> >(forward_iterator<const int*>(a), forward_iterator<const int*>(an));
-    test<std::vector<int, min_allocator<int>> >(bidirectional_iterator<const int*>(a), bidirectional_iterator<const int*>(an));
-    test<std::vector<int, min_allocator<int>> >(random_access_iterator<const int*>(a), random_access_iterator<const int*>(an));
-    test<std::vector<int> >(a, an);
+    test<tidy::vector<int, min_allocator<int>> >(input_iterator<const int*>(a), input_iterator<const int*>(an));
+    test<tidy::vector<int, min_allocator<int>> >(forward_iterator<const int*>(a), forward_iterator<const int*>(an));
+    test<tidy::vector<int, min_allocator<int>> >(bidirectional_iterator<const int*>(a), bidirectional_iterator<const int*>(an));
+    test<tidy::vector<int, min_allocator<int>> >(random_access_iterator<const int*>(a), random_access_iterator<const int*>(an));
+    test<tidy::vector<int> >(a, an);
 #endif
 }

@@ -12,6 +12,7 @@
 // void swap(vector& x);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -20,8 +21,8 @@
 int main()
 {
     {
-        std::vector<int> v1(100);
-        std::vector<int> v2(200);
+        tidy::vector<int> v1(100);
+        tidy::vector<int> v2(200);
         assert(is_contiguous_container_asan_correct(v1)); 
         assert(is_contiguous_container_asan_correct(v2)); 
         v1.swap(v2);
@@ -34,8 +35,8 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<int, min_allocator<int>> v1(100);
-        std::vector<int, min_allocator<int>> v2(200);
+        tidy::vector<int, min_allocator<int>> v1(100);
+        tidy::vector<int, min_allocator<int>> v2(200);
         assert(is_contiguous_container_asan_correct(v1)); 
         assert(is_contiguous_container_asan_correct(v2)); 
         v1.swap(v2);

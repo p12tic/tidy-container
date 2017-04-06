@@ -12,6 +12,7 @@
 // void push_back(const value_type& x);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "min_allocator.h"
@@ -20,7 +21,7 @@
 int main()
 {
     {
-        std::vector<int> c;
+        tidy::vector<int> c;
         c.push_back(0);
         assert(c.size() == 1);
         assert(is_contiguous_container_asan_correct(c)); 
@@ -48,7 +49,7 @@ int main()
             assert(c[j] == j);
     }
     {
-        std::vector<int, stack_allocator<int, 15> > c;
+        tidy::vector<int, stack_allocator<int, 15> > c;
         c.push_back(0);
         assert(c.size() == 1);
         assert(is_contiguous_container_asan_correct(c)); 
@@ -77,7 +78,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<int, min_allocator<int>> c;
+        tidy::vector<int, min_allocator<int>> c;
         c.push_back(0);
         assert(c.size() == 1);
         assert(is_contiguous_container_asan_correct(c)); 

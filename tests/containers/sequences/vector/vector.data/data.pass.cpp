@@ -12,6 +12,7 @@
 // pointer data();
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -20,23 +21,23 @@
 int main()
 {
     {
-        std::vector<int> v;
+        tidy::vector<int> v;
         assert(v.data() == 0);
         assert(is_contiguous_container_asan_correct(v)); 
     }
     {
-        std::vector<int> v(100);
+        tidy::vector<int> v(100);
         assert(v.data() == &v.front());
         assert(is_contiguous_container_asan_correct(v)); 
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<int, min_allocator<int>> v;
+        tidy::vector<int, min_allocator<int>> v;
         assert(v.data() == 0);
         assert(is_contiguous_container_asan_correct(v)); 
     }
     {
-        std::vector<int, min_allocator<int>> v(100);
+        tidy::vector<int, min_allocator<int>> v(100);
         assert(v.data() == &v.front());
         assert(is_contiguous_container_asan_correct(v)); 
     }

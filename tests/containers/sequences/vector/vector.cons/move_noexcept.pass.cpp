@@ -15,6 +15,7 @@
 // This tests a conforming extension
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "MoveOnly.h"
@@ -31,19 +32,19 @@ int main()
 {
 #if __has_feature(cxx_noexcept)
     {
-        typedef std::vector<MoveOnly> C;
+        typedef tidy::vector<MoveOnly> C;
         static_assert(std::is_nothrow_move_constructible<C>::value, "");
     }
     {
-        typedef std::vector<MoveOnly, test_allocator<MoveOnly>> C;
+        typedef tidy::vector<MoveOnly, test_allocator<MoveOnly>> C;
         static_assert(std::is_nothrow_move_constructible<C>::value, "");
     }
     {
-        typedef std::vector<MoveOnly, other_allocator<MoveOnly>> C;
+        typedef tidy::vector<MoveOnly, other_allocator<MoveOnly>> C;
         static_assert(std::is_nothrow_move_constructible<C>::value, "");
     }
     {
-        typedef std::vector<MoveOnly, some_alloc<MoveOnly>> C;
+        typedef tidy::vector<MoveOnly, some_alloc<MoveOnly>> C;
     //  In C++17, move constructors for allocators are not allowed to throw
 #if TEST_STD_VER > 14
         static_assert( std::is_nothrow_move_constructible<C>::value, "");

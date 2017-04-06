@@ -12,6 +12,7 @@
 // template <class... Args> void emplace_back(Args&&... args);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "min_allocator.h"
@@ -55,9 +56,10 @@ public:
 
 int main()
 {
+#if TIDY_EXPECTED_FAIL
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
     {
-        std::vector<A> c;
+        tidy::vector<A> c;
         c.emplace_back(2, 3.5);
         assert(c.size() == 1);
         assert(c.front().geti() == 2);
@@ -72,7 +74,7 @@ int main()
         assert(is_contiguous_container_asan_correct(c)); 
     }
     {
-        std::vector<A, stack_allocator<A, 4> > c;
+        tidy::vector<A, stack_allocator<A, 4> > c;
         c.emplace_back(2, 3.5);
         assert(c.size() == 1);
         assert(c.front().geti() == 2);
@@ -88,7 +90,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<A, min_allocator<A>> c;
+        tidy::vector<A, min_allocator<A>> c;
         c.emplace_back(2, 3.5);
         assert(c.size() == 1);
         assert(c.front().geti() == 2);
@@ -104,4 +106,5 @@ int main()
     }
 #endif
 #endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+#endif // TIDY_EXPECTED_FAIL
 }

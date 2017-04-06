@@ -30,6 +30,7 @@
 // };
 
 #include <vector>
+#include "tidyvector.h"
 #include <iterator>
 #include <type_traits>
 
@@ -37,13 +38,15 @@
 #include "../../Copyable.h"
 #include "min_allocator.h"
 
-struct A { std::vector<A> v; }; // incomplete type support
+#if TIDY_EXPECTED_FAIL
+struct A { tidy::vector<A> v; }; // incomplete type support
+#endif
 
 template <class T, class Allocator>
 void
 test()
 {
-    typedef std::vector<T, Allocator> C;
+    typedef tidy::vector<T, Allocator> C;
 
     static_assert((std::is_same<typename C::value_type, T>::value), "");
     static_assert((std::is_same<typename C::value_type, typename Allocator::value_type>::value), "");
@@ -73,14 +76,14 @@ int main()
     test<int, test_allocator<int> >();
     test<int*, std::allocator<int*> >();
     test<Copyable, test_allocator<Copyable> >();
-    static_assert((std::is_same<std::vector<char>::allocator_type,
+    static_assert((std::is_same<tidy::vector<char>::allocator_type,
                                 std::allocator<char> >::value), "");
 #if __cplusplus >= 201103L
-    static_assert((std::is_same<std::vector<int, min_allocator<int>>::value_type, int>::value), "");
-    static_assert((std::is_same<std::vector<int, min_allocator<int>>::allocator_type, min_allocator<int> >::value), "");
-    static_assert((std::is_same<std::vector<int, min_allocator<int>>::reference, int&>::value), "");
-    static_assert((std::is_same<std::vector<int, min_allocator<int>>::const_reference, const int&>::value), "");
-    static_assert((std::is_same<std::vector<int, min_allocator<int>>::pointer, min_pointer<int>>::value), "");
-    static_assert((std::is_same<std::vector<int, min_allocator<int>>::const_pointer, min_pointer<const int>>::value), "");
+    static_assert((std::is_same<tidy::vector<int, min_allocator<int>>::value_type, int>::value), "");
+    static_assert((std::is_same<tidy::vector<int, min_allocator<int>>::allocator_type, min_allocator<int> >::value), "");
+    static_assert((std::is_same<tidy::vector<int, min_allocator<int>>::reference, int&>::value), "");
+    static_assert((std::is_same<tidy::vector<int, min_allocator<int>>::const_reference, const int&>::value), "");
+    static_assert((std::is_same<tidy::vector<int, min_allocator<int>>::pointer, min_pointer<int>>::value), "");
+    static_assert((std::is_same<tidy::vector<int, min_allocator<int>>::const_pointer, min_pointer<const int>>::value), "");
 #endif
 }

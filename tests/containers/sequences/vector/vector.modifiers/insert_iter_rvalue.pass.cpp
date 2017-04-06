@@ -16,6 +16,7 @@
 #endif
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "MoveOnly.h"
@@ -25,9 +26,10 @@
 int main()
 {
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+#if TIDY_EXPECTED_FAIL
     {
-        std::vector<MoveOnly> v(100);
-        std::vector<MoveOnly>::iterator i = v.insert(v.cbegin() + 10, MoveOnly(3));
+        tidy::vector<MoveOnly> v(100);
+        tidy::vector<MoveOnly>::iterator i = v.insert(v.cbegin() + 10, MoveOnly(3));
         assert(v.size() == 101);
         assert(is_contiguous_container_asan_correct(v)); 
         assert(i == v.begin() + 10);
@@ -39,8 +41,8 @@ int main()
             assert(v[j] == MoveOnly());
     }
     {
-        std::vector<MoveOnly, stack_allocator<MoveOnly, 300> > v(100);
-        std::vector<MoveOnly, stack_allocator<MoveOnly, 300> >::iterator i = v.insert(v.cbegin() + 10, MoveOnly(3));
+        tidy::vector<MoveOnly, stack_allocator<MoveOnly, 300> > v(100);
+        tidy::vector<MoveOnly, stack_allocator<MoveOnly, 300> >::iterator i = v.insert(v.cbegin() + 10, MoveOnly(3));
         assert(v.size() == 101);
         assert(is_contiguous_container_asan_correct(v)); 
         assert(i == v.begin() + 10);
@@ -51,18 +53,20 @@ int main()
         for (++j; j < 101; ++j)
             assert(v[j] == MoveOnly());
     }
+#endif
 #if _LIBCPP_DEBUG >= 1
     {
-        std::vector<int> v1(3);
-        std::vector<int> v2(3);
+        tidy::vector<int> v1(3);
+        tidy::vector<int> v2(3);
         v1.insert(v2.begin(), 4);
         assert(false);
     }
 #endif
 #if __cplusplus >= 201103L
+#if TIDY_EXPECTED_FAIL
     {
-        std::vector<MoveOnly, min_allocator<MoveOnly>> v(100);
-        std::vector<MoveOnly, min_allocator<MoveOnly>>::iterator i = v.insert(v.cbegin() + 10, MoveOnly(3));
+        tidy::vector<MoveOnly, min_allocator<MoveOnly>> v(100);
+        tidy::vector<MoveOnly, min_allocator<MoveOnly>>::iterator i = v.insert(v.cbegin() + 10, MoveOnly(3));
         assert(v.size() == 101);
         assert(is_contiguous_container_asan_correct(v)); 
         assert(i == v.begin() + 10);
@@ -73,10 +77,11 @@ int main()
         for (++j; j < 101; ++j)
             assert(v[j] == MoveOnly());
     }
+#endif
 #if _LIBCPP_DEBUG >= 1
     {
-        std::vector<int, min_allocator<int>> v1(3);
-        std::vector<int, min_allocator<int>> v2(3);
+        tidy::vector<int, min_allocator<int>> v1(3);
+        tidy::vector<int, min_allocator<int>> v2(3);
         v1.insert(v2.begin(), 4);
         assert(false);
     }

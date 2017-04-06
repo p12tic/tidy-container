@@ -12,6 +12,7 @@
 // reference operator[](size_type n);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include <cstdlib>
 
@@ -26,7 +27,7 @@ int main()
 #if __cplusplus >= 201103L
     {
         typedef int T;
-        typedef std::vector<T, min_allocator<T>> C;
+        typedef tidy::vector<T, min_allocator<T>> C;
         const T t[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         C c(std::begin(t), std::end(t));
         c.reserve(2*c.size());
@@ -37,7 +38,7 @@ int main()
     __asan_set_error_exit_code(0);
     {
         typedef int T;
-        typedef std::vector<T> C;
+        typedef tidy::vector<T> C;
         const T t[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         C c(std::begin(t), std::end(t));
         c.reserve(2*c.size());

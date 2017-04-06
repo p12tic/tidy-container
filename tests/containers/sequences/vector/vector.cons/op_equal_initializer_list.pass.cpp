@@ -12,6 +12,7 @@
 // vector& operator=(initializer_list<value_type> il);
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 
 #include "min_allocator.h"
@@ -21,7 +22,7 @@ int main()
 {
 #ifndef _LIBCPP_HAS_NO_GENERALIZED_INITIALIZERS
     {
-    std::vector<int> d;
+    tidy::vector<int> d;
     d = {3, 4, 5, 6};
     assert(d.size() == 4);
     assert(is_contiguous_container_asan_correct(d)); 
@@ -32,7 +33,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-    std::vector<int, min_allocator<int>> d;
+    tidy::vector<int, min_allocator<int>> d;
     d = {3, 4, 5, 6};
     assert(d.size() == 4);
     assert(is_contiguous_container_asan_correct(d)); 

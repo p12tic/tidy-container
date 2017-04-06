@@ -10,6 +10,7 @@
 // <vector>
 
 #include <vector>
+#include "tidyvector.h"
 
 #ifndef _LIBCPP_VERSION
 #error _LIBCPP_VERSION not defined

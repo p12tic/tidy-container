@@ -16,6 +16,7 @@
 #endif
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "min_allocator.h"
@@ -61,8 +62,8 @@ int main()
 {
 #ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
     {
-        std::vector<A> c;
-        std::vector<A>::iterator i = c.emplace(c.cbegin(), 2, 3.5);
+        tidy::vector<A> c;
+        tidy::vector<A>::iterator i = c.emplace(c.cbegin(), 2, 3.5);
         assert(i == c.begin());
         assert(c.size() == 1);
         assert(c.front().geti() == 2);
@@ -88,8 +89,8 @@ int main()
         assert(is_contiguous_container_asan_correct(c)); 
     }
     {
-        std::vector<A, stack_allocator<A, 7> > c;
-        std::vector<A, stack_allocator<A, 7> >::iterator i = c.emplace(c.cbegin(), 2, 3.5);
+        tidy::vector<A, stack_allocator<A, 7> > c;
+        tidy::vector<A, stack_allocator<A, 7> >::iterator i = c.emplace(c.cbegin(), 2, 3.5);
         assert(i == c.begin());
         assert(c.size() == 1);
         assert(c.front().geti() == 2);
@@ -116,16 +117,16 @@ int main()
     }
 #if _LIBCPP_DEBUG >= 1
     {
-        std::vector<A> c1;
-        std::vector<A> c2;
-        std::vector<A>::iterator i = c1.emplace(c2.cbegin(), 2, 3.5);
+        tidy::vector<A> c1;
+        tidy::vector<A> c2;
+        tidy::vector<A>::iterator i = c1.emplace(c2.cbegin(), 2, 3.5);
         assert(false);
     }
 #endif
 #if __cplusplus >= 201103L
     {
-        std::vector<A, min_allocator<A>> c;
-        std::vector<A, min_allocator<A>>::iterator i = c.emplace(c.cbegin(), 2, 3.5);
+        tidy::vector<A, min_allocator<A>> c;
+        tidy::vector<A, min_allocator<A>>::iterator i = c.emplace(c.cbegin(), 2, 3.5);
         assert(i == c.begin());
         assert(c.size() == 1);
         assert(c.front().geti() == 2);
@@ -149,9 +150,9 @@ int main()
     }
 #if _LIBCPP_DEBUG >= 1
     {
-        std::vector<A, min_allocator<A>> c1;
-        std::vector<A, min_allocator<A>> c2;
-        std::vector<A, min_allocator<A>>::iterator i = c1.emplace(c2.cbegin(), 2, 3.5);
+        tidy::vector<A, min_allocator<A>> c1;
+        tidy::vector<A, min_allocator<A>> c2;
+        tidy::vector<A, min_allocator<A>>::iterator i = c1.emplace(c2.cbegin(), 2, 3.5);
         assert(false);
     }
 #endif

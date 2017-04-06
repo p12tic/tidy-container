@@ -16,6 +16,7 @@
 #endif
 
 #include <vector>
+#include "tidyvector.h"
 #include <cassert>
 #include "../../../stack_allocator.h"
 #include "min_allocator.h"
@@ -29,7 +30,7 @@
 int main()
 {
     {
-        std::vector<int> c;
+        tidy::vector<int> c;
         c.push_back(1);
         assert(c.size() == 1);
         c.pop_back();
@@ -41,7 +42,7 @@ int main()
     }
 #if __cplusplus >= 201103L
     {
-        std::vector<int, min_allocator<int>> c;
+        tidy::vector<int, min_allocator<int>> c;
         c.push_back(1);
         assert(c.size() == 1);
         c.pop_back();
